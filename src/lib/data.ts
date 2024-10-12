@@ -128,7 +128,7 @@ export const teachersData = [
 export const studentsData = [
   {
     id: 1,
-    studentId: "1234567890",
+    admissionNumber: "1234567890",
     name: "John Doe",
     email: "john@doe.com",
     photo:
@@ -140,7 +140,7 @@ export const studentsData = [
   },
   {
     id: 2,
-    studentId: "1234567890",
+    admissionNumber: "1234567890",
     name: "Jane Doe",
     email: "jane@doe.com",
     photo:
@@ -152,7 +152,7 @@ export const studentsData = [
   },
   {
     id: 3,
-    studentId: "1234567890",
+    admissionNumber: "1234567890",
     name: "Mike Geller",
     email: "mike@geller.com",
     photo:
@@ -164,7 +164,7 @@ export const studentsData = [
   },
   {
     id: 4,
-    studentId: "1234567890",
+    admissionNumber: "1234567890",
     name: "Jay French",
     email: "jay@gmail.com",
     photo:
@@ -176,7 +176,7 @@ export const studentsData = [
   },
   {
     id: 5,
-    studentId: "1234567890",
+    admissionNumber: "1234567890",
     name: "Jane Smith",
     email: "jane@gmail.com",
     photo:
@@ -188,7 +188,7 @@ export const studentsData = [
   },
   {
     id: 6,
-    studentId: "1234567890",
+    admissionNumber: "1234567890",
     name: "Anna Santiago",
     email: "anna@gmail.com",
     photo:
@@ -200,7 +200,7 @@ export const studentsData = [
   },
   {
     id: 7,
-    studentId: "1234567890",
+    admissionNumber: "1234567890",
     name: "Allen Black",
     email: "allen@black.com",
     photo:
@@ -212,7 +212,7 @@ export const studentsData = [
   },
   {
     id: 8,
-    studentId: "1234567890",
+    admissionNumber: "1234567890",
     name: "Ophelia Castro",
     email: "ophelia@castro.com",
     photo:
@@ -224,7 +224,7 @@ export const studentsData = [
   },
   {
     id: 9,
-    studentId: "1234567890",
+    admissionNumber: "1234567890",
     name: "Derek Briggs",
     email: "derek@briggs.com",
     photo:
@@ -236,7 +236,7 @@ export const studentsData = [
   },
   {
     id: 10,
-    studentId: "1234567890",
+    admissionNumber: "1234567890",
     name: "John Glover",
     email: "john@glover.com",
     photo:
@@ -252,7 +252,7 @@ export const parentsData = [
   {
     id: 1,
     name: "John Doe",
-    students: ["Sarah Brewer"],
+    learners: ["Sarah Brewer"],
     email: "john@doe.com",
     phone: "1234567890",
     address: "123 Main St, Anytown, USA",
@@ -260,7 +260,7 @@ export const parentsData = [
   {
     id: 2,
     name: "Jane Doe",
-    students: ["Cecilia Bradley"],
+    learners: ["Cecilia Bradley"],
     email: "jane@doe.com",
     phone: "1234567890",
     address: "123 Main St, Anytown, USA",
@@ -268,7 +268,7 @@ export const parentsData = [
   {
     id: 3,
     name: "Mike Geller",
-    students: ["Fanny Caldwell"],
+    learners: ["Fanny Caldwell"],
     email: "mike@geller.com",
     phone: "1234567890",
     address: "123 Main St, Anytown, USA",
@@ -276,7 +276,7 @@ export const parentsData = [
   {
     id: 4,
     name: "Jay French",
-    students: ["Mollie Fitzgerald", "Ian Bryant"],
+    learners: ["Mollie Fitzgerald", "Ian Bryant"],
     email: "mike@geller.com",
     phone: "1234567890",
     address: "123 Main St, Anytown, USA",
@@ -284,7 +284,7 @@ export const parentsData = [
   {
     id: 5,
     name: "Jane Smith",
-    students: ["Mable Harvey"],
+    learners: ["Mable Harvey"],
     email: "mike@geller.com",
     phone: "1234567890",
     address: "123 Main St, Anytown, USA",
@@ -292,7 +292,7 @@ export const parentsData = [
   {
     id: 6,
     name: "Anna Santiago",
-    students: ["Joel Lambert"],
+    learners: ["Joel Lambert"],
     email: "mike@geller.com",
     phone: "1234567890",
     address: "123 Main St, Anytown, USA",
@@ -300,7 +300,7 @@ export const parentsData = [
   {
     id: 7,
     name: "Allen Black",
-    students: ["Carrie Tucker", "Lilly Underwood"],
+    learners: ["Carrie Tucker", "Lilly Underwood"],
     email: "mike@geller.com",
     phone: "1234567890",
     address: "123 Main St, Anytown, USA",
@@ -308,7 +308,7 @@ export const parentsData = [
   {
     id: 8,
     name: "Ophelia Castro",
-    students: ["Alexander Blair"],
+    learners: ["Alexander Blair"],
     email: "mike@geller.com",
     phone: "1234567890",
     address: "123 Main St, Anytown, USA",
@@ -316,7 +316,7 @@ export const parentsData = [
   {
     id: 9,
     name: "Derek Briggs",
-    students: ["Susan Webster", "Maude Stone"],
+    learners: ["Susan Webster", "Maude Stone"],
     email: "mike@geller.com",
     phone: "1234567890",
     address: "123 Main St, Anytown, USA",
@@ -324,7 +324,7 @@ export const parentsData = [
   {
     id: 10,
     name: "John Glover",
-    students: ["Stella Scott"],
+    learners: ["Stella Scott"],
     email: "mike@geller.com",
     phone: "1234567890",
     address: "123 Main St, Anytown, USA",
@@ -390,70 +390,70 @@ export const classesData = [
     name: "1A",
     capacity: 20,
     grade: 1,
-    supervisor: "Joseph Padilla",
+    hod: "Joseph Padilla",
   },
   {
     id: 2,
     name: "2B",
     capacity: 22,
     grade: 2,
-    supervisor: "Blake Joseph",
+    hod: "Blake Joseph",
   },
   {
     id: 3,
     name: "3C",
     capacity: 20,
     grade: 3,
-    supervisor: "Tom Bennett",
+    hod: "Tom Bennett",
   },
   {
     id: 4,
     name: "4B",
     capacity: 18,
     grade: 4,
-    supervisor: "Aaron Collins",
+    hod: "Aaron Collins",
   },
   {
     id: 5,
     name: "5A",
     capacity: 16,
     grade: 5,
-    supervisor: "Iva Frank",
+    hod: "Iva Frank",
   },
   {
     id: 5,
     name: "5B",
     capacity: 20,
     grade: 5,
-    supervisor: "Leila Santos",
+    hod: "Leila Santos",
   },
   {
     id: 7,
     name: "7A",
     capacity: 18,
     grade: 7,
-    supervisor: "Carrie Walton",
+    hod: "Carrie Walton",
   },
   {
     id: 8,
     name: "6B",
     capacity: 22,
     grade: 6,
-    supervisor: "Christopher Butler",
+    hod: "Christopher Butler",
   },
   {
     id: 9,
     name: "6C",
     capacity: 18,
     grade: 6,
-    supervisor: "Marc Miller",
+    hod: "Marc Miller",
   },
   {
     id: 10,
     name: "6D",
     capacity: 20,
     grade: 6,
-    supervisor: "Ophelia Marsh",
+    hod: "Ophelia Marsh",
   },
 ];
 
