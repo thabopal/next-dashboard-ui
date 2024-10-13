@@ -12,9 +12,9 @@ type Learner = {
     name:string;
     email?:string;
     photo:string;
+    phone?:string;
     grade:number;
     class:string;
-    phone?:string;
     address:string;
 }
 
@@ -26,10 +26,7 @@ const columns = [
         header: "Admission Number", accessor: "admissionNumber", className: "hidden md:table-cell"
     },
     {
-        header: "Subject", accessor: "subject", className: "hidden md:table-cell"
-    },
-    {
-        header:"Classes", accessor:"classes", className:"hidden md:table-cell"
+        header:"Grade", accessor:"grade", className:"hidden md:table-cell"
     },
     {
         header:"Phone", accessor:"phone", className:"hidden lg:table-cell"    
@@ -65,9 +62,6 @@ const LearnerListPage = () => {
                         </button>
                     </Link>
                     {role === "admin" && (
-                    //     <button className="w-7 h-7 flex items-center justify-center rounded-full bg-lamaPurple">
-                    //         <Image src="/delete.png" alt="" width={16} height={16} />
-                    // </button>
                     <FormModal table="learner" type="delete" id={item.id}/>
                 )}
                 </div>
@@ -90,9 +84,6 @@ const LearnerListPage = () => {
                             <Image src="/sort.png" alt="" width={14} height={14} />
                         </button>
                         {role === "admin" && (
-                        //     <button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow">
-                        //     <Image src="/plus.png" alt="" width={14} height={14} />
-                        // </button>
                         <FormModal table="learner" type="create" />
                     )}
                     </div>
