@@ -1,5 +1,6 @@
 import Announcements from "@/app/components/Announcements"
 import BigCalendar from "@/app/components/BigCalendar"
+import FormModal from "@/app/components/FormModal"
 import Performance from "@/app/components/Performance"
 import Image from "next/image"
 import Link from "next/link"
@@ -17,7 +18,17 @@ const SingleTeacherPage = () => {
                             <Image src="https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="" width={144} height={144} className="w-36 h-36 rounded-full object-cover" />
                         </div>
                         <div className="w-2/3 flex flex-col justify-between gap-4">
-                            <h1 className="text-xl font-semibold">Thabo Pali</h1>
+                            <div className="flex items-center gap-4">
+                                <h1 className="text-xl font-semibold">Thabo Pali</h1>
+                                <FormModal table="teacher" type="update" data={{
+                                    firstName: "Thabo",
+                                    lastName: "Pali",
+                                    phone: "074 734 6373",
+                                    address: "1234 Street, Suburb, City",
+                                    bloodType: "A+",
+                                    birthday: "1990-07-01",
+                                }} />
+                            </div>
                             <p className="text-sm text-gray-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                             <div className="flex items-center justify-between gap-2 flex-wrap text-xs font-medium">
                                 <div className="w-full md:w-1/3 lg:w-full 2xl:w-1/3 flex items-center gap-2">
@@ -43,7 +54,7 @@ const SingleTeacherPage = () => {
                     <div className="flex-1 flex gap-4 justify-between flex-wrap">
                         {/* CARD */}
                         <div className="bg-white p-4 rounded-md flex gap-4 w-full md:w-[48%] xl:[48%] 2xl:w-[48%]">
-                            <Image src="/singleAttendance.png" alt="" width={24} height={24} className="w-6 h-6"/>
+                            <Image src="/singleAttendance.png" alt="" width={24} height={24} className="w-6 h-6" />
                             <div className="text-xl font-semibold">
                                 <h1>90%</h1>
                                 <span className="text-sm text-gray-400">Attendance</span>
@@ -51,7 +62,7 @@ const SingleTeacherPage = () => {
                         </div>
                         {/* CARD */}
                         <div className="bg-white p-4 rounded-md flex gap-4 w-full md:w-[48%] xl:[48%] 2xl[48%] 2xl:w-[48%]">
-                            <Image src="/singleBranch.png" alt="" width={24} height={24} className="w-6 h-6"/>
+                            <Image src="/singleBranch.png" alt="" width={24} height={24} className="w-6 h-6" />
                             <div className="text-xl font-semibold">
                                 <h1>6</h1>
                                 <span className="text-sm text-gray-400">Branches</span>
@@ -59,7 +70,7 @@ const SingleTeacherPage = () => {
                         </div>
                         {/* CARD */}
                         <div className="bg-white p-4 rounded-md flex gap-4 w-full md:w-[48%] xl:[48%] 2xl[48%] 2xl:w-[48%]">
-                            <Image src="/singleLesson.png" alt="" width={24} height={24} className="w-6 h-6"/>
+                            <Image src="/singleLesson.png" alt="" width={24} height={24} className="w-6 h-6" />
                             <div className="text-xl font-semibold">
                                 <h1>6</h1>
                                 <span className="text-sm text-gray-400">Lessons</span>
@@ -67,7 +78,7 @@ const SingleTeacherPage = () => {
                         </div>
                         {/* CARD */}
                         <div className="bg-white p-4 rounded-md flex gap-4 w-full md:w-[48%] xl:[48%] 2xl[48%] 2xl:w-[48%]">
-                            <Image src="/singleClass.png" alt="" width={24} height={24} className="w-6 h-6"/>
+                            <Image src="/singleClass.png" alt="" width={24} height={24} className="w-6 h-6" />
                             <div className="text-xl font-semibold">
                                 <h1>6</h1>
                                 <span className="text-sm text-gray-400">Classes</span>
