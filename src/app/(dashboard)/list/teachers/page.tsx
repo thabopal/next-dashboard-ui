@@ -138,9 +138,7 @@ const TeacherListPage = async ({ searchParams, }: { searchParams: { [key: string
             {/* LIST */}
             <Table columns={columns} renderRow={renderRow} data={data} />
             {/* PAGINATION */}
-
             <Pagination page={p} count={count} />
-
         </div>
     );
 };

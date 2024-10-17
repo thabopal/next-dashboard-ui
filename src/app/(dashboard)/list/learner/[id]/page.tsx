@@ -86,11 +86,11 @@ const SingleLearnerPage = () => {
                 <div className="bg-white p-4 rounded-md">
                     <h1 className="text-xl font-semibold">Shortcuts</h1>
                     <div className="mt-4 flex gap-4 flex-wrap text-xs text-gray-500">
-                        <Link className="p-3 rounded-md bg-lamaSkyLight" href="/">Learner&apos;s Lessons</Link>
+                        <Link className="p-3 rounded-md bg-lamaSkyLight" href={`/list/lessons?classId=${2}`}>Learner&apos;s Lessons</Link>
                         <Link className="p-3 rounded-md bg-lamaPurpleLight" href={`/list/teachers?classId=${2}`}>Learner&apos;s Teachers</Link>
-                        <Link className="p-3 rounded-md bg-lamaYellowLight" href="/">Learner&apos;s Results</Link>
-                        <Link className="p-3 rounded-md bg-pink-50" href="/">Learner&apos;s Exams</Link>
-                        <Link className="p-3 rounded-md bg-lamaSkyLight" href="/">Learner&apos;s Assignments</Link>
+                        <Link className="p-3 rounded-md bg-lamaYellowLight" href={`/list/results?admissionNumber=${2}`}>Learner&apos;s Results</Link>
+                        <Link className="p-3 rounded-md bg-pink-50" href={`/list/exams?classId=${2}`}>Learner&apos;s Exams</Link>
+                        <Link className="p-3 rounded-md bg-lamaSkyLight" href={`/list/assignments?classId=${2}`}>Learner&apos;s Assignments</Link>
                     </div>
                 </div>
                 <Performance />
