@@ -21,7 +21,7 @@ const forms: {
     teacher: (type, data) => <TeacherForm type={type} data={data} />,
     learner: (type, data) => <LearnerForm type={type} data={data} />,
 };
-const FormModal = ({ table, type, data, id }: { table: | "teacher" | "learner" | "parent" | "subject" | "class" | "lesson" | "exam" | "assignment" | "result" | "attendance" | "event" | "announcement"; type: "create" | "update" | "delete"; data?: any; id?: number; }) => {
+const FormModal = ({ table, type, data, id }: { table: | "teacher" | "learner" | "parent" | "subject" | "class" | "lesson" | "exam" | "assignment" | "result" | "attendance" | "event" | "announcement"; type: "create" | "update" | "delete"; data?: any; id?: number | string; }) => {
 
     const size = type === "create" ? "w-8 h-8" : "w-7 h-7";
     const bgColor = type === "create" ? "bg-lamaYellow" : type === "update" ? "bg-lamaSky" : "bg-lamaPurple";
