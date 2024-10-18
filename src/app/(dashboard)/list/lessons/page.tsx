@@ -21,10 +21,15 @@ const columns = [
     {
         header: "Teacher", accessor: "teacher", className: "hidden md:table-cell"
     },
-    {
-        header: "Actions", accessor: "actions"
-    }
-]
+    ...(role === "admin" || role === "teacher"
+        ? [
+            {
+                header: "Actions",
+                accessor: "actions",
+            },
+        ]
+        : []),
+];
 
 const renderRow = (item: LessonList) => (
     <tr key={item.id} className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-lamaPurpleLight">
