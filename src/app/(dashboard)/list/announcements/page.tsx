@@ -1,3 +1,4 @@
+import FormContainer from "@/app/components/FormContainer"
 import FormModal from "@/app/components/FormModal"
 import Pagination from "@/app/components/Pagination"
 import Table from "@/app/components/Table"
@@ -43,8 +44,8 @@ const renderRow = (item: AnnouncementList) => (
 
                 {role === "admin" && (
                     <>
-                        <FormModal table="announcement" type="update" data={item} />
-                        <FormModal table="announcement" type="delete" id={item.id} />
+                          <FormContainer table="announcement" type="update" data={item} />
+                          <FormContainer table="announcement" type="delete" id={item.id} />
                     </>
                 )}
             </div>
@@ -116,7 +117,7 @@ const AnnouncementListPage = async ({ searchParams, }: { searchParams: { [key: s
                             <Image src="/sort.png" alt="" width={14} height={14} />
                         </button>
                         {role === "admin" && (
-                            <FormModal table="announcement" type="create" />
+                            <FormContainer table="announcement" type="create" />
                         )}
                     </div>
                 </div>
