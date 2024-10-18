@@ -2,9 +2,12 @@
 
 import dynamic from "next/dynamic";
 import Image from "next/image";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
+
 // import TeacherForm from "./forms/TeacherForm";
 // import LearnerForm from "./forms/LearnerForm";
+
+//USE LAZY LOADING
 
 const TeacherForm = dynamic(() => import("./forms/TeacherForm"), {
     loading: () => <p>Loading...</p>,
@@ -13,13 +16,17 @@ const TeacherForm = dynamic(() => import("./forms/TeacherForm"), {
 const LearnerForm = dynamic(() => import("./forms/LearnerForm"), {
     loading: () => <p>Loading...</p>,
 });
+const SubjectForm = dynamic(() => import("./forms/SubjectForm"), {
+    loading: () => <p>Loading...</p>,
+});
 
 const forms: {
-    [key: string]: (type: "create" | "update", data?: any) => JSX.Element;
+    [key: string]: (setOpen:Dispatch<SetStateAction<boolean>>, type: "create" | "update", data?: any) => JSX.Element;
 
 }={
-    teacher: (type, data) => <TeacherForm type={type} data={data} />,
-    learner: (type, data) => <LearnerForm type={type} data={data} />,
+    subject: (setOpen, type, data, ) => <SubjectForm type={type} data={data} setOpen={setOpen}/>,
+    teacher: (setOpen, type, data, ) => <TeacherForm type={type} data={data} setOpen={setOpen}/>,
+    learner: (setOpen, type, data, ) => <LearnerForm type={type} data={data} setOpen={setOpen}/>,
 };
 const FormModal = ({ table, type, data, id }: { table: | "teacher" | "learner" | "parent" | "subject" | "class" | "lesson" | "exam" | "assignment" | "result" | "attendance" | "event" | "announcement"; type: "create" | "update" | "delete"; data?: any; id?: number | string; }) => {
 
@@ -34,7 +41,7 @@ const FormModal = ({ table, type, data, id }: { table: | "teacher" | "learner" |
                 <button className="bg-red-700 text-white py-2 px-4 rounded-md border-none w-max self-center">Delete</button>
             </form>
         ) : type === "create" || type === "update" ? (
-            forms[table](type, data)
+            forms[table](setOpen, type, data)
         ) : (
            "Form not found!"
         );

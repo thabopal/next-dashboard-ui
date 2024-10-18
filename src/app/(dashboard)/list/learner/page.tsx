@@ -2,9 +2,9 @@ import FormModal from "@/app/components/FormModal"
 import Pagination from "@/app/components/Pagination"
 import Table from "@/app/components/Table"
 import TableSearch from "@/app/components/TableSearch"
-import { role } from "@/lib/data"
 import prisma from "@/lib/prisma"
 import { ITEM_PER_PAGE } from "@/lib/settings"
+import { role } from "@/lib/utils"
 import { Class, Learner, Prisma } from "@prisma/client"
 import Image from "next/image"
 import Link from "next/link"
@@ -27,10 +27,15 @@ const columns = [
     {
         header: "Address", accessor: "address", className: "hidden lg:table-cell"
     },
-    {
-        header: "Actions", accessor: "actions"
-    }
-]
+    ...(role === "admin"
+        ? [
+            {
+                header: "Actions",
+                accessor: "actions",
+            },
+        ]
+        : []),
+];
 
 const renderRow = (item: LearnerList) => (
     <tr key={item.id} className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-lamaPurpleLight">

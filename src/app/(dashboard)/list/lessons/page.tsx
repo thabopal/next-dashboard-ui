@@ -2,12 +2,11 @@ import FormModal from "@/app/components/FormModal"
 import Pagination from "@/app/components/Pagination"
 import Table from "@/app/components/Table"
 import TableSearch from "@/app/components/TableSearch"
-import { lessonsData, role, } from "@/lib/data"
 import prisma from "@/lib/prisma"
 import { ITEM_PER_PAGE } from "@/lib/settings"
+import { role } from "@/lib/utils"
 import { Class, Lesson, Prisma, Subject, Teacher } from "@prisma/client"
 import Image from "next/image"
-import Link from "next/link"
 
 type LessonList = Lesson & {subject: Subject} & {class: Class} & {teacher: Teacher};
 
@@ -21,7 +20,7 @@ const columns = [
     {
         header: "Teacher", accessor: "teacher", className: "hidden md:table-cell"
     },
-    ...(role === "admin" || role === "teacher"
+    ...(role === "admin"
         ? [
             {
                 header: "Actions",
@@ -120,7 +119,6 @@ const LessonListPage = async ({ searchParams, }: { searchParams: { [key: string]
             {/* LIST */}
             <Table columns={columns} renderRow={renderRow} data={data} />
             {/* PAGINATION */}
-
             <Pagination page={p} count={count}/>
 
         </div>
