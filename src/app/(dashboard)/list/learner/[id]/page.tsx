@@ -1,10 +1,36 @@
 import Announcements from "@/app/components/Announcements"
-import BigCalendar from "@/app/components/BigCalendar"
+import BigCalendarContainer from "@/app/components/BigCalendarContainer"
+import LearnerAttendanceCard from "@/app/components/LearnerAttendanceCard"
 import Performance from "@/app/components/Performance"
+import prisma from "@/lib/prisma"
+import { auth } from "@clerk/nextjs/server"
+import { Class, Learner } from "@prisma/client"
 import Image from "next/image"
 import Link from "next/link"
+import { notFound } from "next/navigation"
+import { Suspense } from "react"
 
-const SingleLearnerPage = () => {
+const SingleLearnerPage = async ({ params: { id } }: { params: { id: string } }) => {
+
+    const {userId, sessionClaims} = auth()
+    const role = (sessionClaims?.metadata as {role?: string})?.role;
+
+    const learner: (Learner & {
+        class: (Class & {_count:{lessons:number}})
+    }) 
+    | null = await prisma.learner.findUnique({
+        where: {
+            id
+        },
+        include:{
+            class: {include: {_count: {select: {lessons: true}}}}
+        }
+    });
+
+
+    if (!learner) {
+        return notFound();
+    }
     return (
         <div className="flex-1 p-4 flex flex-col gap-4 xl:flex-row">
             {/* LEFT */}
@@ -14,27 +40,27 @@ const SingleLearnerPage = () => {
                     {/* USER INFO CARD */}
                     <div className="bg-lamaSky py-6 px-4 rounded-md flex-1 flex gap-4">
                         <div className="w-1/3">
-                            <Image  src="https://images.pexels.com/photos/5414817/pexels-photo-5414817.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="" width={144} height={144} className="w-36 h-36 rounded-full object-cover" />
+                            <Image  src={learner.img || "/noAvatar.png"} alt="" width={144} height={144} className="w-36 h-36 rounded-full object-cover" />
                         </div>
                         <div className="w-2/3 flex flex-col justify-between gap-4">
-                            <h1 className="text-xl font-semibold">Lesedi Mabina</h1>
+                            <h1 className="text-xl font-semibold">{learner.name + " " + learner.surname}</h1>
                             <p className="text-sm text-gray-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                             <div className="flex items-center justify-between gap-2 flex-wrap text-xs font-medium">
                                 <div className="w-full md:w-1/3 lg:w-full 2xl:w-1/3 flex items-center gap-2">
                                     <Image src="/blood.png" alt="" width={14} height={14} />
-                                    <span>A+</span>
+                                    <span>{learner.bloodType}</span>
                                 </div>
                                 <div className="w-full md:w-1/3 lg:w-full 2xl:w-1/3 flex items-center gap-2">
                                     <Image src="/date.png" alt="" width={14} height={14} />
-                                    <span>July 2024</span>
+                                    <span>{new Intl.DateTimeFormat("en-ZA").format(learner.birthday)}</span>
                                 </div>
                                 <div className="w-full md:w-1/3 lg:w-full 2xl:w-1/3 flex items-center gap-2">
                                     <Image src="/mail.png" alt="" width={14} height={14} />
-                                    <span>mail@thabopali.co.za</span>
+                                    <span>{learner.email || "-"}</span>
                                 </div>
                                 <div className="w-full md:w-1/3 lg:w-full 2xl:w-1/3 flex items-center gap-2">
                                     <Image src="/phone.png" alt="" width={14} height={14} />
-                                    <span>074 734 6373</span>
+                                    <span>{learner.phone || "-"}</span>
                                 </div>
                             </div>
                         </div>
@@ -44,16 +70,15 @@ const SingleLearnerPage = () => {
                         {/* CARD */}
                         <div className="bg-white p-4 rounded-md flex gap-4 w-full md:w-[48%] xl:[48%] 2xl:w-[48%]">
                             <Image src="/singleAttendance.png" alt="" width={24} height={24} className="w-6 h-6"/>
-                            <div className="text-xl font-semibold">
-                                <h1>90%</h1>
-                                <span className="text-sm text-gray-400">Attendance</span>
-                            </div>
+                            <Suspense fallback="loading...">
+                                <LearnerAttendanceCard id={learner.id}/>
+                            </Suspense>
                         </div>
                         {/* CARD */}
                         <div className="bg-white p-4 rounded-md flex gap-4 w-full md:w-[48%] xl:[48%] 2xl[48%] 2xl:w-[48%]">
                             <Image src="/singleBranch.png" alt="" width={24} height={24} className="w-6 h-6"/>
                             <div className="text-xl font-semibold">
-                                <h1>6</h1>
+                                <h1>{learner.class.name.charAt(0)}th</h1>
                                 <span className="text-sm text-gray-400">Grade</span>
                             </div>
                         </div>
@@ -61,7 +86,7 @@ const SingleLearnerPage = () => {
                         <div className="bg-white p-4 rounded-md flex gap-4 w-full md:w-[48%] xl:[48%] 2xl[48%] 2xl:w-[48%]">
                             <Image src="/singleLesson.png" alt="" width={24} height={24} className="w-6 h-6"/>
                             <div className="text-xl font-semibold">
-                                <h1>16</h1>
+                                <h1>{learner.class._count.lessons}</h1>
                                 <span className="text-sm text-gray-400">Lessons</span>
                             </div>
                         </div>
@@ -69,7 +94,7 @@ const SingleLearnerPage = () => {
                         <div className="bg-white p-4 rounded-md flex gap-4 w-full md:w-[48%] xl:[48%] 2xl[48%] 2xl:w-[48%]">
                             <Image src="/singleClass.png" alt="" width={24} height={24} className="w-6 h-6"/>
                             <div className="text-xl font-semibold">
-                                <h1>6A</h1>
+                                <h1>{learner.class.name}</h1>
                                 <span className="text-sm text-gray-400">Class</span>
                             </div>
                         </div>
@@ -78,7 +103,7 @@ const SingleLearnerPage = () => {
                 {/* BOTTOM */}
                 <div className="mt-4 bg-white rounded-md p-4 h-[800px]">
                     <h1>Teacher&apos;s Timetable</h1>
-                    <BigCalendar />
+                    <BigCalendarContainer type="classId" id={learner.class.id}/>
                 </div>
             </div>
             {/* RIGHT */}

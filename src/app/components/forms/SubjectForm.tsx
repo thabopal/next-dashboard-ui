@@ -55,6 +55,7 @@ const SubjectForm = ({ type, data, setOpen, relatedData }: { type: "create" | "u
                     register={register}
                     error={errors.name}
                 />
+                {data && (
                 <InputField
                     label="Id"
                     name="id"
@@ -63,6 +64,7 @@ const SubjectForm = ({ type, data, setOpen, relatedData }: { type: "create" | "u
                     error={errors?.id}
                     hidden
                 />
+                )}
                 <div className="flex flex-col gap-2 w-full md:w-1/4 justify-center">
                     <label className="text-xs text-gray-400">Teachers</label>
                     <select multiple className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full" {...register("teachers")} defaultValue={data?.gender}>

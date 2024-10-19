@@ -25,14 +25,20 @@ const ClassForm = ({ type, data, setOpen, relatedData }: { type: "create" | "upd
 
     //AFTER REACT 19 IT WILL BE useActionState
 
-    const [state, formAction] = useFormState(type === "create" ? createClass : updateClass, { success: false, error: false });
+    const [state, formAction] = useFormState(
+        type === "create" ? createClass : updateClass, 
+        { 
+            success: false, 
+            error: false 
+        }
+    );
 
     const onSubmit = handleSubmit(data => {
         console.log(data);
         formAction(data);
     })
 
-    const router = useRouter()
+    const router = useRouter();
 
     useEffect(() => {
         if (state.success) {
@@ -40,7 +46,7 @@ const ClassForm = ({ type, data, setOpen, relatedData }: { type: "create" | "upd
             setOpen(false);
             router.refresh();
         }
-    }, [state]);
+    }, [state, router]);
 
     const { teachers, grades } = relatedData;
 
@@ -74,7 +80,7 @@ const ClassForm = ({ type, data, setOpen, relatedData }: { type: "create" | "upd
                     <label className="text-xs text-gray-400">HOD</label>
                     <select className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full" {...register("hodId")} defaultValue={data?.gender}>
                         {teachers.map((teacher:{id:string;name:string;surname:string}) => (
-                            <option key={teacher.id} value={teacher.id}>{teacher.name + " " + teacher.surname}</option>
+                            <option key={teacher.id} value={teacher.id} selected={data && teacher.id === data.hodId}>{teacher.name + " " + teacher.surname}</option>
                         ))}
                         <option value="male">Male</option>
                         <option value="female">Female</option>
@@ -85,10 +91,8 @@ const ClassForm = ({ type, data, setOpen, relatedData }: { type: "create" | "upd
                     <label className="text-xs text-gray-400">Grade</label>
                     <select className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full" {...register("hodId")} defaultValue={data?.gradeId}>
                         {grades.map((grade:{id:number;level:number}) => (
-                            <option key={grade.id} value={grade.id}>{grade.level}</option>
+                            <option key={grade.id} value={grade.id} selected={data && grade.id === data.gradeId}>{grade.level}</option>
                         ))}
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
                     </select>
                     {errors.gradeId?.message && <p className="text-xs text-red-400">{errors.gradeId.message.toString()}</p>}
                 </div>
