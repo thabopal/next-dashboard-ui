@@ -4,52 +4,56 @@ import Table from "@/app/components/Table"
 import TableSearch from "@/app/components/TableSearch"
 import prisma from "@/lib/prisma"
 import { ITEM_PER_PAGE } from "@/lib/settings"
-import { role } from "@/lib/utils"
+import { auth } from "@clerk/nextjs/server"
 import { Class, Lesson, Prisma, Subject, Teacher } from "@prisma/client"
 import Image from "next/image"
 
-type LessonList = Lesson & {subject: Subject} & {class: Class} & {teacher: Teacher};
-
-const columns = [
-    {
-        header: "Subject Name", accessor: "subject"
-    },
-    {
-        header: "Class Name", accessor: "class"
-    },
-    {
-        header: "Teacher", accessor: "teacher", className: "hidden md:table-cell"
-    },
-    ...(role === "admin"
-        ? [
-            {
-                header: "Actions",
-                accessor: "actions",
-            },
-        ]
-        : []),
-];
-
-const renderRow = (item: LessonList) => (
-    <tr key={item.id} className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-lamaPurpleLight">
-        <td className="flex items-center gp-4 p-4">
-            {item.subject.name}
-        </td>
-        <td>{item.class.name}</td>
-        <td className="hidden md:table-cell">{item.teacher.name + " " + item.teacher.surname}</td>
-        <td>
-            <div className="flex items-center gap-2">
-                {role === "admin" && (
-                    <>
-                        <FormModal table="lesson" type="update" data={item} />
-                        <FormModal table="lesson" type="delete" id={item.id} />
-                    </>
-                )}
-            </div>
-        </td>
-    </tr>
-);
 const LessonListPage = async ({ searchParams, }: { searchParams: { [key: string]: string | undefined }; }) => {
+    type LessonList = Lesson & {subject: Subject} & {class: Class} & {teacher: Teacher};
+    
+    const { userId, sessionClaims } = auth()
+    const role = (sessionClaims?.metadata as { role?: string })?.role;
+    const currentUserId = userId;
+    
+    const columns = [
+        {
+            header: "Subject Name", accessor: "subject"
+        },
+        {
+            header: "Class Name", accessor: "class"
+        },
+        {
+            header: "Teacher", accessor: "teacher", className: "hidden md:table-cell"
+        },
+        ...(role === "admin"
+            ? [
+                {
+                    header: "Actions",
+                    accessor: "actions",
+                },
+            ]
+            : []),
+    ];
+    
+    const renderRow = (item: LessonList) => (
+        <tr key={item.id} className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-lamaPurpleLight">
+            <td className="flex items-center gp-4 p-4">
+                {item.subject.name}
+            </td>
+            <td>{item.class.name}</td>
+            <td className="hidden md:table-cell">{item.teacher.name + " " + item.teacher.surname}</td>
+            <td>
+                <div className="flex items-center gap-2">
+                    {role === "admin" && (
+                        <>
+                            <FormModal table="lesson" type="update" data={item} />
+                            <FormModal table="lesson" type="delete" id={item.id} />
+                        </>
+                    )}
+                </div>
+            </td>
+        </tr>
+    );
     const { page, ...queryParams } = searchParams;
 
     const p = page ? parseInt(page) : 1;

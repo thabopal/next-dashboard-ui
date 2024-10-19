@@ -17,7 +17,7 @@ const LearnerAttendanceCard = async ({id}:{id:string}) => {
   const percentage = presentDays / totalDays * 100;
   return (
     <div className="text-xl font-semibold">
-      <h1>{percentage}%</h1>
+      <h1>{percentage || "-"}%</h1>
       <span className="text-sm text-gray-400">Attendance</span>
     </div>
   )

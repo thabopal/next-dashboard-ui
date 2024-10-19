@@ -1,5 +1,6 @@
 import Announcements from "@/app/components/Announcements"
 import BigCalendarContainer from "@/app/components/BigCalendarContainer"
+import FormContainer from "@/app/components/FormContainer"
 import LearnerAttendanceCard from "@/app/components/LearnerAttendanceCard"
 import Performance from "@/app/components/Performance"
 import prisma from "@/lib/prisma"
@@ -43,7 +44,14 @@ const SingleLearnerPage = async ({ params: { id } }: { params: { id: string } })
                             <Image  src={learner.img || "/noAvatar.png"} alt="" width={144} height={144} className="w-36 h-36 rounded-full object-cover" />
                         </div>
                         <div className="w-2/3 flex flex-col justify-between gap-4">
+                        <div className="flex items-center gap-4">
                             <h1 className="text-xl font-semibold">{learner.name + " " + learner.surname}</h1>
+                            {role === "admin" && (<FormContainer
+                                    table="learner"
+                                    type="update"
+                                    data={learner} />
+                               )}
+                               </div>
                             <p className="text-sm text-gray-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                             <div className="flex items-center justify-between gap-2 flex-wrap text-xs font-medium">
                                 <div className="w-full md:w-1/3 lg:w-full 2xl:w-1/3 flex items-center gap-2">
