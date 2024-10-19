@@ -5,10 +5,14 @@ import Table from "@/app/components/Table"
 import TableSearch from "@/app/components/TableSearch"
 import prisma from "@/lib/prisma"
 import { ITEM_PER_PAGE } from "@/lib/settings"
-import { currentUserId, role } from "@/lib/utils"
+import { auth } from "@clerk/nextjs/server"
+//import { currentUserId, role } from "@/lib/utils"
 import { Announcement, Class, Prisma } from "@prisma/client"
 import Image from "next/image"
 
+const {userId, sessionClaims} = auth()
+const role = (sessionClaims?.metadata as {role?: string})?.role;
+const currentUserId = userId;
 
 type AnnouncementList = Announcement & { class: Class };
 
