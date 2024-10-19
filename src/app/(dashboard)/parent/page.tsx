@@ -1,5 +1,5 @@
 import Announcements from "@/app/components/Announcements";
-import BigCalendar from "@/app/components/BigCalendar";
+import BigCalendarContainer from "@/app/components/BigCalendarContainer";
 
 const ParentPage = () => {
     return (
@@ -8,7 +8,7 @@ const ParentPage = () => {
             <div className="w-full xl:W-2/3">
                 <div className="h-full bg-white p-4 rounded-md">
                     <h1 className="text-xl font-semibold">Timetable | John Doe</h1>
-                    <BigCalendar />
+                    {/* <BigCalendarContainer type="classId" id={learner.class.id}/> */}
                 </div>
             </div>
             {/* RIGHT */}

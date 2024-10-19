@@ -4,10 +4,14 @@ import Table from "@/app/components/Table"
 import TableSearch from "@/app/components/TableSearch"
 import prisma from "@/lib/prisma"
 import { ITEM_PER_PAGE } from "@/lib/settings"
-import { role } from "@/lib/utils"
+import { auth } from "@clerk/nextjs/server"
 import { Class, Learner, Prisma } from "@prisma/client"
 import Image from "next/image"
 import Link from "next/link"
+
+const {userId, sessionClaims} = auth()
+const role = (sessionClaims?.metadata as {role?: string})?.role;
+const currentUserId = userId;
 
 type LearnerList = Learner & { class: Class };
 
