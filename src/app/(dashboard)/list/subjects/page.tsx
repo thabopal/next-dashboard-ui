@@ -97,7 +97,7 @@ const SubjectListPage = async ({ searchParams, }: { searchParams: { [key: string
                             <Image src="/sort.png" alt="" width={14} height={14} />
                         </button>
                         {role === "admin" && (
-                            <FormModal table="subject" type="create" />
+                            <FormContainer table="subject" type="create" />
                         )}
                     </div>
                 </div>

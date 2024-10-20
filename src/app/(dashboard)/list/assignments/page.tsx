@@ -1,3 +1,4 @@
+import FormContainer from "@/app/components/FormContainer"
 import FormModal from "@/app/components/FormModal"
 import Pagination from "@/app/components/Pagination"
 import Table from "@/app/components/Table"
@@ -57,8 +58,8 @@ const AssignmentListPage = async ({ searchParams, }: { searchParams: { [key: str
                 <div className="flex items-center gap-2">
                     {(role === "admin" || role === "teacher") && (
                         <>
-                            <FormModal table="assignment" type="update" data={item} />
-                            <FormModal table="assignment" type="delete" id={item.id} />
+                            <FormContainer table="assignment" type="update" data={item} />
+                            <FormContainer table="assignment" type="delete" id={item.id} />
                         </>
                     )}
                 </div>
@@ -164,7 +165,7 @@ const AssignmentListPage = async ({ searchParams, }: { searchParams: { [key: str
                         </button>
                         {role === "admin" ||
                             (role === "teacher" && (
-                                <FormModal table="assignment" type="create" />
+                                <FormContainer table="assignment" type="create" />
                             ))}
                     </div>
                 </div>

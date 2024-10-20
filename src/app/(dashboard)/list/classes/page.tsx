@@ -115,7 +115,7 @@ const ClassListPage = async ({ searchParams, }: { searchParams: { [key: string]:
                             <Image src="/sort.png" alt="" width={14} height={14} />
                         </button>
                         {role === "admin" && (
-                            <FormModal table="class" type="create" />
+                            <FormContainer table="class" type="create" />
                         )}
                     </div>
                 </div>
