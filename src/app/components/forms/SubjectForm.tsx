@@ -40,7 +40,7 @@ const SubjectForm = ({ type, data, setOpen, relatedData }: { type: "create" | "u
             setOpen(false);
             router.refresh();
         }
-    }, [state]);
+    }, [state, router, type, setOpen]);
 
     const { teachers } = relatedData;
 

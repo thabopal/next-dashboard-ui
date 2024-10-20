@@ -110,7 +110,7 @@ const SingleLearnerPage = async ({ params: { id } }: { params: { id: string } })
                 </div>
                 {/* BOTTOM */}
                 <div className="mt-4 bg-white rounded-md p-4 h-[800px]">
-                    <h1>Teacher&apos;s Timetable</h1>
+                    <h1>Learner&apos;s Timetable</h1>
                     <BigCalendarContainer type="classId" id={learner.class.id}/>
                 </div>
             </div>
