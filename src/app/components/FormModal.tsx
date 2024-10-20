@@ -1,6 +1,6 @@
 "use client";
 
-import { deleteClass, deleteExam, deleteLearner, deleteSubject, deleteTeacher } from "@/lib/actions";
+import { deleteClass, deleteExam, deleteLearner, deleteParent, deleteSubject, deleteTeacher } from "@/lib/actions";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -14,7 +14,7 @@ const deleteActionMap = {
     class: deleteClass,
     teacher: deleteTeacher,
     learner: deleteLearner,
-    parent: deleteSubject,
+    parent: deleteParent,
     lesson: deleteSubject,
     exam: deleteExam,
     assignment: deleteSubject,
@@ -46,6 +46,11 @@ const ClassForm = dynamic(() => import("./forms/ClassForm"), {
 const ExamForm = dynamic(() => import("./forms/ExamForm"), {
     loading: () => <p>Loading...</p>,
 });
+
+const ParentForm= dynamic(() => import("./forms/ParentForm"), {
+    loading: () => <p>Loading...</p>,
+});
+
 const forms: {
     [key: string]: (setOpen: Dispatch<SetStateAction<boolean>>, type: "create" | "update", data?: any, relatedData?:any) => JSX.Element;
 
@@ -54,8 +59,9 @@ const forms: {
     class: (setOpen, type, data, relatedData) => <ClassForm type={type} data={data} setOpen={setOpen} relatedData={relatedData}/>,
     teacher: (setOpen, type, data,relatedData) => <TeacherForm type={type} data={data} setOpen={setOpen} relatedData={relatedData}/>,
     learner: (setOpen, type, data,relatedData) => <LearnerForm type={type} data={data} setOpen={setOpen} relatedData={relatedData}/>,
-    exam: (setOpen, type, data, relatedData) => <ExamForm type={type} data={data} setOpen={setOpen} relatedData={relatedData} />
-        // TODO OTHER LIST ITEMS
+    exam: (setOpen, type, data, relatedData) => <ExamForm type={type} data={data} setOpen={setOpen} relatedData={relatedData} />,
+    parent: (setOpen, type, data, relatedData) => <ParentForm type={type} data={data} setOpen={setOpen} relatedData={relatedData} />,
+    // TODO OTHER LIST ITEMS
 };
 const FormModal = ({ table, type, data, id, relatedData }: FormContainerProps & {relatedData?:any}) => {
 
@@ -93,9 +99,6 @@ const FormModal = ({ table, type, data, id, relatedData }: FormContainerProps & 
             "Form not found!"
         );
     }
-
-
-
 
     return (
         <>
