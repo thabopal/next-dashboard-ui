@@ -110,7 +110,7 @@ async function main() {
         });
     }
 
-    // LEARNER
+    // LEARNERS
     for (let i = 1; i <= 50; i++) {
         const randomGradeId = gradeIds[Math.floor(Math.random() * gradeIds.length)];
         const randomClassId = classIds[Math.floor(Math.random() * classIds.length)];
