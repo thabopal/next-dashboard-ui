@@ -63,10 +63,10 @@ const ClassForm = ({ type, data, setOpen, relatedData }: { type: "create" | "upd
                 />
                 <InputField
                     label="Capacity"
-                    name="name"
-                    defaultValue={data?.name}
+                    name="capacity"
+                    defaultValue={data?.capacity}
                     register={register}
-                    error={errors.name}
+                    error={errors.capacity}
                 />
                 <InputField
                     label="Id"
@@ -82,14 +82,12 @@ const ClassForm = ({ type, data, setOpen, relatedData }: { type: "create" | "upd
                         {teachers.map((teacher:{id:string;name:string;surname:string}) => (
                             <option key={teacher.id} value={teacher.id} selected={data && teacher.id === data.hodId}>{teacher.name + " " + teacher.surname}</option>
                         ))}
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
                     </select>
                     {errors.hodId?.message && <p className="text-xs text-red-400">{errors.hodId.message.toString()}</p>}
                 </div>
                 <div className="flex flex-col gap-2 w-full md:w-1/4 justify-center">
                     <label className="text-xs text-gray-400">Grade</label>
-                    <select className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full" {...register("hodId")} defaultValue={data?.gradeId}>
+                    <select className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full" {...register("gradeId")} defaultValue={data?.gradeId}>
                         {grades.map((grade:{id:number;level:number}) => (
                             <option key={grade.id} value={grade.id} selected={data && grade.id === data.gradeId}>{grade.level}</option>
                         ))}
