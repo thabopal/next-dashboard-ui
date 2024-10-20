@@ -233,6 +233,7 @@ export const createLearner = async (currentState: CurrentState, data: LearnerSch
             password: data.password,
             firstName: data.name,
             lastName: data.surname,
+            publicMetadata:{role:"learner"}
         });
 
 
@@ -440,6 +441,7 @@ export const createParent = async (currentState: CurrentState, data: ParentSchem
             password: data.password,
             firstName: data.name,
             lastName: data.surname,
+            publicMetadata:{role:"parent"}
         });
 
 
