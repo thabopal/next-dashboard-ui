@@ -25,6 +25,7 @@
     "react-calendar": "^5.0.0",
     "react-dom": "^18",
     "react-hook-form": "^7.53.0",
+    "react-select": "^5.8.1",
     "react-toastify": "^10.0.6",
     "recharts": "^2.12.7",
     "ts-node": "^10.9.2",

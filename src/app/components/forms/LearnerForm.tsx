@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import InputField from "../InputField";
 import Image from "next/image";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
@@ -11,6 +11,7 @@ import { createLearner, createTeacher, updateLearner, updateTeacher } from "@/li
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { CldUploadWidget } from "next-cloudinary";
+import Select from "react-select";
 
 
 
@@ -19,6 +20,7 @@ const LearnerForm = ({ type, data, setOpen, relatedData }: { type: "create" | "u
     const {
         register,
         handleSubmit,
+        control,
         formState: { errors },
     } = useForm<LearnerSchema>({
         resolver: zodResolver(learnerSchema),
@@ -43,7 +45,9 @@ const LearnerForm = ({ type, data, setOpen, relatedData }: { type: "create" | "u
         }
     }, [state, router, type, setOpen]);
 
-    const { grades, classes } = relatedData;
+    const { grades, classes, parents } = relatedData;
+
+    const limitedParents = parents.slice(0, 5);
 
     return (
         <form className="flex flex-col gap-4" onSubmit={onSubmit}>
@@ -112,14 +116,15 @@ const LearnerForm = ({ type, data, setOpen, relatedData }: { type: "create" | "u
                     register={register}
                     error={errors.birthday}
                 />
-                <InputField
+                {/* <InputField
                     label="Parent Id"
                     name="parentId"
                     type=""
                     defaultValue={data?.parentId}
                     register={register}
                     error={errors.parentId}
-                />
+                /> */}
+
                  {data && (
                 <InputField
                     label="Id"
@@ -147,6 +152,19 @@ const LearnerForm = ({ type, data, setOpen, relatedData }: { type: "create" | "u
                         ))}
                     </select>
                     {errors.gradeId?.message && <p className="text-xs text-red-400">{errors.gradeId.message.toString()}</p>}
+                </div>
+                <div className="flex flex-col gap-2 w-full md:w-1/4 justify-center">
+                    <label className="text-xs text-gray-400">Parent</label>
+                   <Controller name="parentId" control={control} defaultValue={data?.parentId || []}  render={({ field}) => (
+                    <Select 
+                        {...field}
+                        options={limitedParents.map((parent: { id: number; name: string; surname: string; }) => ({ 
+                            value: parent.id, 
+                            label: parent.name + " " + parent.surname }))}
+                        className="text-xs"
+                    />
+                   )}/>
+                    {errors.parentId?.message && <p className="text-xs text-red-400">{errors.parentId.message.toString()}</p>}
                 </div>
                 <div className="flex flex-col gap-2 w-full md:w-1/4 justify-center">
                     <label className="text-xs text-gray-400">Class</label>

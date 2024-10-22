@@ -71,8 +71,6 @@ const SubjectForm = ({ type, data, setOpen, relatedData }: { type: "create" | "u
                         {teachers.map((teacher:{id:string;name:string;surname:string}) => (
                             <option key={teacher.id} value={teacher.id}>{teacher.name + " " + teacher.surname}</option>
                         ))}
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
                     </select>
                     {errors.teachers?.message && <p className="text-xs text-red-400">{errors.teachers.message.toString()}</p>}
                 </div>
