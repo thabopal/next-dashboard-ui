@@ -19,9 +19,9 @@ const BigCalendarContainer = async ({ type, id }: { type: "teacherId" | "classId
     const schedule = adjustScheduleToCurrentWeek(data);
 
     return (
-        <>
+        <div className="w-full h-full">
             <BigCalendar data={schedule} />
-        </>
+        </div>
     )
 }
 
