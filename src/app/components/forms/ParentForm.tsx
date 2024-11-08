@@ -45,7 +45,7 @@ const ParentForm = ({ type, data, setOpen, relatedData }: { type: "create" | "up
 
     return (
         <form className="flex flex-col gap-4" onSubmit={onSubmit}>
-            <h1 className="text-xl font-semibold">{type === "create" ? "Create a new teacher" : "Update a teacher"}</h1>
+            <h1 className="text-xl font-semibold">{type === "create" ? "Create a new parent" : "Update a parent"}</h1>
             <span className="text-xs text-gray-400 font-medium">Authentication Information</span>
             <div className="flex justify-between flex-wrap gap-4">
                 <InputField label="Username" defaultValue={data?.username} register={register} name="username" error={errors.username} />

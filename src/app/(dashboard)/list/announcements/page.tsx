@@ -10,13 +10,11 @@ import { auth } from "@clerk/nextjs/server"
 import { Announcement, Class, Prisma } from "@prisma/client"
 import Image from "next/image"
 
-
+type AnnouncementList = Announcement & { class: Class };
 const AnnouncementListPage = async ({ searchParams, }: { searchParams: { [key: string]: string | undefined }; }) => {
     const {userId, sessionClaims} = auth()
     const role = (sessionClaims?.metadata as {role?: string})?.role;
     const currentUserId = userId;
-    
-    type AnnouncementList = Announcement & { class: Class };
     
     const columns = [
         {
