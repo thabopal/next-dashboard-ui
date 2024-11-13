@@ -277,7 +277,7 @@ export const updateLearner = async (currentState: CurrentState, data: LearnerSch
         });
 
 
-
+        
         await prisma.learner.update({
             where: {
                 id: data.id
@@ -287,10 +287,10 @@ export const updateLearner = async (currentState: CurrentState, data: LearnerSch
                 username: data.username,
                 name: data.name,
                 surname: data.surname,
-                email: data.email,
-                phone: data.phone,
+                email: data.email || null,
+                phone: data.phone || null,
                 address: data.address,
-                img: data.img,
+                img: data.img || null,
                 bloodType: data.bloodType,
                 gender: data.gender,
                 birthday: data.birthday,

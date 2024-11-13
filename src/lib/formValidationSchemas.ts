@@ -69,7 +69,15 @@ export const learnerSchema = z.object({
     gender: z.enum(["MALE", "FEMALE"], { message: "Gender is required!" }),
     classId: z.coerce.number().min(1, { message: "Class is required!"}),
     gradeId: z.coerce.number().min(1, { message: "Grade is required!" }),
-    parentId: z.string().min(1, { message: "Parent Id is required!" }),
+    parentId: z
+    .union([
+      z.string().min(1, { message: "Parent Id is required!" }),  // For cases where parentId is already a string
+      z.object({
+        label: z.string(),
+        value: z.string().min(1, { message: "Parent Id is required!" })
+      }).transform((obj) => obj.value) // Extracts the 'value' property from the object
+    ])
+    //parentId: z.string().min(1, { message: "Parent Id is required!" }),
 });
 
 export type LearnerSchema = z.infer<typeof learnerSchema>;

@@ -92,7 +92,7 @@ const TeacherForm = ({ type, data, setOpen, relatedData }: { type: "create" | "u
                     error={errors.bloodType}
                 />
                 <InputField
-                    label="Birthday"
+                    label="Date of Birth"
                     name="birthday"
                     type="date"
                     defaultValue={data?.birthday.toISOString().split("T")[0]}

@@ -128,7 +128,8 @@ const LearnerForm = ({ type, data, setOpen, relatedData }: { type: "create" | "u
                  {data && (
                 <InputField
                     label="Id"
-                    name="id"
+                    name="parentId"
+                    type=""
                     defaultValue={data?.id}
                     register={register}
                     error={errors?.id}
